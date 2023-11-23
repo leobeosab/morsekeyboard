@@ -1,6 +1,8 @@
 # Morse Keyboard
 I made this morse keyboard after a lot of people saw my binary keyboard and thought morse would be a good idea.
 
+https://github.com/leobeosab/morsekeyboard/assets/1686221/0e4d816e-ded8-41e3-8f84-82f5082d4a29
+
 ## Timings
 The keyboard has some hardcoded timings currently
 dit (.): 25-200ms 
@@ -20,4 +22,4 @@ word_complete: 1000ms
 [video link](https://www.youtube.com/shorts/t-02Ab9mo9E)
 
 ## Morse Table
-[!morse_table](./readme-assets/morse-code.png)
+![morse_table](./readme-assets/morse-code.png)
