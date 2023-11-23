@@ -13,8 +13,8 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 #define INPUT_PIN 4
 
 const int DIT_LENGTH[2] = {25, 200};
-const int CHAR_LENGTH[2] = {20 , 1000};
-const int WORD_LENGTH[2] = {2000, 3000};
+const int CHAR_LENGTH[2] = {400 , 1000};
+const int WORD_LENGTH[2] = {1001, 3000};
 const int DAH_LENGTH[2] = {201, 1000};
 
 bool keyboardEnabled = true;
@@ -84,16 +84,18 @@ const int KEYMAP[6][64] = {
   },
   // 6 bit maps
   {
-    -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, (int) '`', -1, -1, (int) '?',
-    -1, -1, -1, -1, -1, -1, -1,
-    (int) '-', -1, -1, -1, -1, -1, -1,
-    -1, (int) ';', (int) '!', -1, -1, -1, -1,
-    -1, (int) ',', -1, -1, -1, -1, (int)':',
-    -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1,  (int) '?', -1, -1, -1,
+    -1, -1, -1, -1, (int) '`', -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, (int) '-', -1, -1, -1, -1, -1, -1,
+    -1, -1, (int) ';', (int) '!', -1, -1, -1, -1,
+    -1, -1, (int) ',', -1, -1, -1, -1, (int)':',
+    (int) ':', -1, -1, -1, -1, -1, -1, -1
   }
 };
+
+  
 
 /**
  * Much similar to the binary keyboard, this code is hacky garbage
@@ -196,7 +198,7 @@ void send_word() {
 
 void send_char() {
   // collect dits and dahs and translate 
-  Serial.print("current letter: "); Serial.println(currentLetter);
+  Serial.print("current letter: "); Serial.println(currentLetter>>1);
   int value = KEYMAP[letterIndex-1][currentLetter>>1];
 
   displayString += (char)value;
@@ -216,6 +218,7 @@ void send_keypress(int key) {
 }
 
 void print_click_status(String beginMessage) {
+  return;
   Serial.println("|--------------------------------|");
   Serial.println(beginMessage);
   Serial.print("input pressed: ");
@@ -303,7 +306,7 @@ void draw() {
 
   display.println(output);
 
-  display.setCursor(0, 18);
+  display.setCursor(0, 16);
   display.println(displayString);
   display.display();
 
